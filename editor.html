@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subhaaram - Customize Your Invitation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="templates.css">
+    <style>
+        body {
+            background-color: #FDF8F5;
+            color: #4A3A31;
+            font-family: 'Inter', sans-serif;
+            padding: 40px 20px;
+        }
+        .editor-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: #C29B62;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #4A3A31;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        .photo-upload {
+            border: 2px dashed #ddd;
+            padding: 30px;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #faf8f5;
+        }
+        .photo-upload:hover {
+            border-color: #C29B62;
+        }
+        button[type="submit"] {
+            background-color: #C29B62;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s ease;
+            margin-top: 20px;
+        }
+        button[type="submit"]:hover {
+            background-color: #a37d45;
+        }
+        .languages-section {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .success-box {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background: #eef7ee;
+            border: 1px solid #c3e6c3;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .success-box a {
+            display: inline-block;
+            margin: 10px;
+            color: #2b7a2b;
+            font-weight: 600;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="editor-container">
+        <h1>Customize Your Invitation</h1>
+        
+        <form id="editor-form">
+            <div class="form-group">
+                <label>Choose a Template</label>
+                <select id="template" required>
+                    <option value="blossomoud">Blossom Oud (Classic)</option>
+                    <option value="emerald-noir">Emerald Noir (Premium Dark)</option>
+                    <option value="template6">Template 6</option>
+                    <option value="thesacredgarden">The Sacred Garden</option>
+                </select>
+            </div>
+
+            <div style="display:flex; gap:20px;">
+                <div class="form-group" style="flex:1;">
+                    <label>Bride's Name *</label>
+                    <input type="text" id="brideName" required placeholder="e.g. Priya">
+                </div>
+                <div class="form-group" style="flex:1;">
+                    <label>Groom's Name *</label>
+                    <input type="text" id="groomName" required placeholder="e.g. Rahul">
+                </div>
+            </div>
+
+            <div style="display:flex; gap:20px;">
+                <div class="form-group" style="flex:1;">
+                    <label>Wedding Date *</label>
+                    <input type="text" id="weddingDate" required placeholder="e.g. 24 October 2027">
+                </div>
+                <div class="form-group" style="flex:1;">
+                    <label>Celebration Timing *</label>
+                    <input type="text" id="celebrationTime" required placeholder="e.g. from 4:00 PM onwards">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Location / Venue *</label>
+                <input type="text" id="location" required placeholder="e.g. The Grand Palace, Jaipur">
+            </div>
+
+            <div class="form-group">
+                <label>Schedule of Events</label>
+                <textarea id="schedule" rows="3" placeholder="e.g. 4:00 PM: Baraat&#10;7:00 PM: Pheras&#10;9:00 PM: Dinner"></textarea>
+            </div>
+
+            <div class="form-group photo-upload" id="drop-zone">
+                <label for="heroPhoto" style="cursor:pointer; margin:0;">
+                    Click to add a hero photo for your template<br>
+                    <span style="font-size:12px; color:#999;">(Max 2MB, automatically optimized)</span>
+                </label>
+                <input type="file" id="heroPhoto" accept="image/*" style="display:none;">
+                <img id="imagePreview" style="max-width:100%; max-height:200px; margin-top:15px; display:none; border-radius:8px;">
+            </div>
+
+            <div class="languages-section">
+                <label style="font-size:18px; margin-bottom:15px; color:#C29B62; font-family:'Playfair Display', serif;">Well-Wishing Messages</label>
+                <p style="font-size:13px; color:#666; margin-top:0;">Provide your welcome message. It will be used on the template.</p>
+                
+                <div class="form-group">
+                    <label>English</label>
+                    <input type="text" id="msg-en" placeholder="e.g. We invite you to celebrate with us.">
+                </div>
+                <div class="form-group">
+                    <label>Hindi</label>
+                    <input type="text" id="msg-hi" placeholder="e.g. हम आपको हमारे साथ जश्न मनाने के लिए आमंत्रित करते हैं।">
+                </div>
+                <div class="form-group">
+                    <label>Urdu</label>
+                    <input type="text" id="msg-ur" placeholder="e.g. ہم آپ کو ہمارے ساتھ جشن منانے کی دعوت دیتے ہیں۔">
+                </div>
+                <div class="form-group">
+                    <label>Bengali</label>
+                    <input type="text" id="msg-bn" placeholder="e.g. আমরা আপনাকে আমাদের সাথে উদযাপন করার আমন্ত্রণ জানাচ্ছি।">
+                </div>
+                <div class="form-group">
+                    <label>Telugu</label>
+                    <input type="text" id="msg-te" placeholder="e.g. మాతో వేడుకల్లో పాల్గొనాల్సిందిగా మిమ్మల్ని ఆహ్వానిస్తున్నాము.">
+                </div>
+            </div>
+
+            <button type="submit" id="submitBtn">Generate My Invitation Link</button>
+        </form>
+
+        <div class="success-box" id="successBox">
+            <h2 style="color: #2b7a2b; margin-top:0;">Success!</h2>
+            <p>Your beautiful digital invitation is ready.</p>
+            <div>
+                <a href="#" id="inviteLink" target="_blank" style="background:#2b7a2b; color:white; padding:10px 20px; border-radius:30px;">View Invitation</a>
+                <a href="#" id="dashboardLink" target="_blank" style="background:white; border:2px solid #2b7a2b; padding:8px 20px; border-radius:30px;">View RSVPs</a>
+            </div>
+            <p style="font-size:12px; color:#666; margin-top:15px;">Save these links to share with your guests and track RSVPs.</p>
+        </div>
+    </div>
+
+    <script type="module">
+        import { db, collection, addDoc } from './firebase-config.js';
+
+        let compressedImageBase64 = null;
+
+        // Image compression to fit within Firestore limits (max 1MB doc)
+        document.getElementById('heroPhoto').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const MAX_WIDTH = 1200;
+                    const MAX_HEIGHT = 1200;
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > height) {
+                        if (width > MAX_WIDTH) {
+                            height *= MAX_WIDTH / width;
+                            width = MAX_WIDTH;
+                        }
+                    } else {
+                        if (height > MAX_HEIGHT) {
+                            width *= MAX_HEIGHT / height;
+                            height = MAX_HEIGHT;
+                        }
+                    }
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+                    
+                    compressedImageBase64 = canvas.toDataURL('image/jpeg', 0.7);
+                    
+                    const preview = document.getElementById('imagePreview');
+                    preview.src = compressedImageBase64;
+                    preview.style.display = 'block';
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        document.getElementById('editor-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.textContent = 'Generating...';
+            btn.disabled = true;
+
+            const templateName = document.getElementById('template').value;
+            
+            const data = {
+                template: templateName,
+                brideName: document.getElementById('brideName').value,
+                groomName: document.getElementById('groomName').value,
+                weddingDate: document.getElementById('weddingDate').value,
+                celebrationTime: document.getElementById('celebrationTime').value,
+                location: document.getElementById('location').value,
+                schedule: document.getElementById('schedule').value,
+                messages: {
+                    en: document.getElementById('msg-en').value,
+                    hi: document.getElementById('msg-hi').value,
+                    ur: document.getElementById('msg-ur').value,
+                    bn: document.getElementById('msg-bn').value,
+                    te: document.getElementById('msg-te').value
+                },
+                heroPhotoUrl: compressedImageBase64, // using base64 for simplicity
+                createdAt: new Date().toISOString()
+            };
+
+            try {
+                const docRef = await addDoc(collection(db, "invitations"), data);
+                
+                document.getElementById('editor-form').style.display = 'none';
+                
+                const inviteUrl = `${templateName}.html?inviteId=${docRef.id}`;
+                const dashboardUrl = `rsvp-dashboard.html?inviteId=${docRef.id}`;
+                
+                document.getElementById('inviteLink').href = inviteUrl;
+                document.getElementById('dashboardLink').href = dashboardUrl;
+                document.getElementById('successBox').style.display = 'block';
+
+            } catch (error) {
+                console.error("Error generating invitation:", error);
+                alert("Error generating invitation. Please check console.");
+                btn.textContent = 'Generate My Invitation Link';
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

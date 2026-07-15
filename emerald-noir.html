@@ -3,45 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emerald Noir Template Preview</title>
+    <title>Emerald Noir - Subhaaram Invitations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --emerald: #0f3b2a;
+            --emerald-dark: #071f15;
+            --gold: #d4af37;
+            --gold-light: #f5df8b;
+            --text-light: #e0e0e0;
+        }
         body, html {
             margin: 0;
             padding: 0;
             width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background-color: #0f0f0f;
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--emerald-dark);
+            color: var(--text-light);
+            scroll-behavior: smooth;
         }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(rgba(7,31,21,0.7), rgba(7,31,21,0.9)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop') center/cover;
+            padding: 20px;
+        }
+        #hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--gold);
+            margin: 0;
+            font-weight: 400;
+            letter-spacing: 2px;
+        }
+        .hero h1 span {
             display: block;
+            font-size: 2rem;
+            font-style: italic;
+            color: var(--gold-light);
+            margin: 10px 0;
         }
-        .back-button {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            z-index: 9999;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: background 0.3s ease;
+        .hero p {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 30px;
+            color: var(--gold);
         }
-        .back-button:hover {
-            background: rgba(0, 0, 0, 0.9);
+        .details-section {
+            padding: 80px 20px;
+            text-align: center;
+            background-color: var(--emerald);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .details-section h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+        .detail-card {
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 30px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        .detail-card h3 {
+            color: var(--gold-light);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+        .detail-card p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        .welcome-message {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--gold);
+            text-align: center;
+            padding: 60px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero h1 span { font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
-    <a href="index.html#templates" class="back-button">← Back to Templates</a>
-    <iframe src="https://zareqia.com/invite/demo?template=emerald-noir" allowfullscreen></iframe>
+
+    <div class="hero">
+        <img id="hero-bg" src="" alt="">
+        <p>TOGETHER WITH THEIR FAMILIES</p>
+        <h1 id="couple-names">Bride <span>&</span> Groom</h1>
+        <p id="wedding-date">Save the Date</p>
+    </div>
+
+    <div class="welcome-message" id="welcome-msg">
+        We request the honor of your presence to celebrate our new beginning.
+    </div>
+
+    <div class="details-section">
+        <h2>Event Details</h2>
+        
+        <div class="detail-card">
+            <h3>When</h3>
+            <p id="event-time">Time</p>
+        </div>
+
+        <div class="detail-card">
+            <h3>Where</h3>
+            <p id="event-location">Venue</p>
+        </div>
+        
+        <div class="detail-card">
+            <h3>Schedule</h3>
+            <p id="event-schedule">Schedule of events</p>
+        </div>
+    </div>
+
+    <!-- RSVP Section will be injected here automatically by dynamic-template.js -->
+
+    <!-- Dynamic Mapping Script -->
+    <script>
+        // Set the map for this template before dynamic-template.js loads
+        window.templateSpecificMap = {
+            name: 'emerald-noir',
+            map: {
+                names: 'couple-names', // ID of the element
+                date: 'wedding-date',
+                time: 'event-time',
+                venue: 'event-location',
+                schedule: 'event-schedule',
+                welcomeMsg: 'welcome-msg',
+                heroBg: 'hero-bg'
+            }
+        };
+    </script>
+    <script type="module" src="dynamic-template.js"></script>
 </body>
 </html>

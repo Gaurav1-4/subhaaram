@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subhaaram - RSVP Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="templates.css">
+    <style>
+        body {
+            background-color: #FDF8F5;
+            color: #4A3A31;
+            font-family: 'Inter', sans-serif;
+            padding: 40px 20px;
+        }
+        .dashboard-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: #C29B62;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            background: #faf8f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid #f0e9e1;
+        }
+        .stat-box {
+            text-align: center;
+        }
+        .stat-box h2 {
+            margin: 0;
+            color: #C29B62;
+            font-size: 32px;
+        }
+        .stat-box p {
+            margin: 5px 0 0 0;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background-color: #f9f9f9;
+            font-weight: 600;
+            color: #666;
+        }
+        .status-attending {
+            color: #2b7a2b;
+            font-weight: bold;
+            background: #eef7ee;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        .status-declined {
+            color: #d32f2f;
+            font-weight: bold;
+            background: #fde7e7;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <h1>RSVP & Guest Messages</h1>
+        
+        <div class="stats">
+            <div class="stat-box">
+                <h2 id="total-attending">0</h2>
+                <p>Attending</p>
+            </div>
+            <div class="stat-box">
+                <h2 id="total-declined">0</h2>
+                <p>Declined</p>
+            </div>
+            <div class="stat-box">
+                <h2 id="total-guests">0</h2>
+                <p>Total Plus Ones</p>
+            </div>
+        </div>
+
+        <table id="rsvp-table">
+            <thead>
+                <tr>
+                    <th>Guest Name</th>
+                    <th>Status</th>
+                    <th>Additional Guests</th>
+                    <th>Well Wishes</th>
+                    <th>Submitted On</th>
+                </tr>
+            </thead>
+            <tbody id="rsvp-body">
+                <tr><td colspan="5" style="text-align:center;">Loading RSVPs...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Import logic -->
+    <script type="module">
+        import { db, collection, query, where, getDocs } from './firebase-config.js';
+
+        async function loadRSVPs() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const inviteId = urlParams.get('inviteId');
+            
+            if (!inviteId) {
+                document.getElementById('rsvp-body').innerHTML = '<tr><td colspan="5" style="text-align:center;color:red;">Error: No Invite ID found in the URL.</td></tr>';
+                return;
+            }
+
+            try {
+                const q = query(collection(db, "rsvps"), where("inviteId", "==", inviteId));
+                const querySnapshot = await getDocs(q);
+                
+                const tbody = document.getElementById('rsvp-body');
+                tbody.innerHTML = '';
+                
+                let attendingCount = 0;
+                let declinedCount = 0;
+                let plusOneCount = 0;
+
+                if (querySnapshot.empty) {
+                    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No RSVPs received yet. Share your invitation link!</td></tr>';
+                    return;
+                }
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const row = document.createElement('tr');
+                    
+                    if (data.status === 'attending') {
+                        attendingCount++;
+                        plusOneCount += parseInt(data.plusOnes || 0, 10);
+                    } else {
+                        declinedCount++;
+                    }
+
+                    const statusBadge = data.status === 'attending' 
+                        ? '<span class="status-attending">Attending</span>' 
+                        : '<span class="status-declined">Declined</span>';
+
+                    row.innerHTML = `
+                        <td><strong>${data.guestName}</strong><br><small>${data.email || ''}</small></td>
+                        <td>${statusBadge}</td>
+                        <td>${data.plusOnes || 0}</td>
+                        <td style="font-style:italic;">"${data.message || ''}"</td>
+                        <td>${new Date(data.createdAt).toLocaleDateString()}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+
+                document.getElementById('total-attending').textContent = attendingCount;
+                document.getElementById('total-declined').textContent = declinedCount;
+                document.getElementById('total-guests').textContent = attendingCount + plusOneCount;
+
+            } catch (error) {
+                console.error("Error fetching RSVPs:", error);
+                document.getElementById('rsvp-body').innerHTML = '<tr><td colspan="5" style="text-align:center;color:red;">Error loading data. Check console.</td></tr>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadRSVPs);
+    </script>
+</body>
+</html>
