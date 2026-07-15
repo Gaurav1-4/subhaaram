@@ -2,19 +2,15 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebas
 import { getFirestore, collection, addDoc, getDoc, doc, setDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
-// TODO: REPLACE THIS OBJECT WITH YOUR FIREBASE CONFIGURATION
-// 1. Go to Firebase Console (console.firebase.google.com)
-// 2. Open Project Settings (Gear icon)
-// 3. Scroll down to "Your apps", select the Web icon (</>), register an app
-// 4. Copy the firebaseConfig object and paste it here:
+// This is a template file. The build script will replace these placeholders with real environment variables.
 const firebaseConfig = {
-  apiKey: "AIzaSyDPwMDQGu4VUEQYI65Vw3SwZdJHtOx4hGI",
-  authDomain: "shubaaram-3960c.firebaseapp.com",
-  projectId: "shubaaram-3960c",
-  storageBucket: "shubaaram-3960c.firebasestorage.app",
-  messagingSenderId: "51273456150",
-  appId: "1:51273456150:web:3af81e2858fbf34d7cb337",
-  measurementId: "G-E46E4KGS1S"
+  apiKey: "__FIREBASE_API_KEY__",
+  authDomain: "__FIREBASE_AUTH_DOMAIN__",
+  projectId: "__FIREBASE_PROJECT_ID__",
+  storageBucket: "__FIREBASE_STORAGE_BUCKET__",
+  messagingSenderId: "__FIREBASE_MESSAGING_SENDER_ID__",
+  appId: "__FIREBASE_APP_ID__",
+  measurementId: "__FIREBASE_MEASUREMENT_ID__"
 };
 
 // Initialize Firebase

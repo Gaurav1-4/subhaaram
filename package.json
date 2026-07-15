@@ -1,0 +1,11 @@
+{
+  "name": "subhaaram",
+  "version": "1.0.0",
+  "description": "Subhaaram Invitations",
+  "main": "index.html",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
