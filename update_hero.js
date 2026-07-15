@@ -276,7 +276,41 @@ const htmlContent = `
         margin-top: 0;
     }
 }
-</style>
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.95);
+        min-width: 220px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 999;
+        border-radius: 8px;
+        top: 100%;
+        left: 0;
+        padding: 10px 0;
+    }
+    .dropdown-content a {
+        color: #333 !important;
+        padding: 12px 20px !important;
+        text-decoration: none;
+        display: block;
+        font-size: 14px !important;
+        border-bottom: none !important;
+        transition: background-color 0.3s, color 0.3s !important;
+    }
+    .dropdown-content a:hover {
+        background-color: var(--gold) !important;
+        color: #fff !important;
+    }
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    </style>
 
 <div class="custom-hero-wrapper">
     <!-- Navbar -->
@@ -286,7 +320,20 @@ const htmlContent = `
         </div>
         <div class="custom-nav-links">
             <a href="index.html" style="color: var(--gold); border-bottom: 1px solid var(--gold);">Home</a>
-            <a href="#rec2074093753">Collections</a>
+            <div class="dropdown">
+                <a href="#rec2074093753" class="dropbtn">Collections <span style="font-size: 10px;">▼</span></a>
+                <div class="dropdown-content">
+                    <a href="thesacredgarden.html">The Sacred Garden</a>
+                    <a href="blossomoud.html">Blossom & Oud</a>
+                    <a href="template6.html">Dolce Vita</a>
+                    <a href="emerald-noir.html">Emerald Noir</a>
+                    <a href="garden-romance.html">Garden Romance</a>
+                    <a href="ivory-elegance.html">Ivory Elegance</a>
+                    <a href="modern-minimal.html">Modern Minimal</a>
+                    <a href="rose-gold-blush.html">Rose Gold Blush</a>
+                    <a href="royal-elegance.html">Royal Elegance</a>
+                </div>
+            </div>
             <a href="#rec2074093803">How It Works</a>
             <a href="order.html">Pricing</a>
             <a href="#">About Us</a>
