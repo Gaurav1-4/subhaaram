@@ -286,8 +286,8 @@ const htmlContent = `
         </div>
         <div class="custom-nav-links">
             <a href="index.html" style="color: var(--gold); border-bottom: 1px solid var(--gold);">Home</a>
-            <a href="index.html#rec2074093753">Collections</a>
-            <a href="index.html#rec2074093803">How It Works</a>
+            <a href="#rec2074093753">Collections</a>
+            <a href="#rec2074093803">How It Works</a>
             <a href="order.html">Pricing</a>
             <a href="#">About Us</a>
             <a href="#">Contact</a>
@@ -344,7 +344,7 @@ const htmlContent = `
 
             <div class="custom-hero-buttons">
                 <a href="order.html" class="custom-btn custom-btn-primary">Explore Collections →</a>
-                <a href="index.html#rec2074093803" class="custom-btn custom-btn-secondary">
+                <a href="#rec2074093803" class="custom-btn custom-btn-secondary">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
                     See How It Works
                 </a>
