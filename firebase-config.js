@@ -8,12 +8,13 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstati
 // 3. Scroll down to "Your apps", select the Web icon (</>), register an app
 // 4. Copy the firebaseConfig object and paste it here:
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyDPwMDQGu4VUEQYI65Vw3SwZdJHtOx4hGI",
+  authDomain: "shubaaram-3960c.firebaseapp.com",
+  projectId: "shubaaram-3960c",
+  storageBucket: "shubaaram-3960c.firebasestorage.app",
+  messagingSenderId: "51273456150",
+  appId: "1:51273456150:web:3af81e2858fbf34d7cb337",
+  measurementId: "G-E46E4KGS1S"
 };
 
 // Initialize Firebase
